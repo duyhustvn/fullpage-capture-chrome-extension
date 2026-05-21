@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Full Page Capture</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <img src="../assets/icons/icon32.png" alt="" class="logo">
+      <span class="title">Full Page Capture</span>
+    </header>
+
+    <div class="buttons">
+      <button id="btn-full-page" class="btn btn-primary">
+        <span class="btn-icon">📸</span> Full Page
+      </button>
+      <button id="btn-visible" class="btn btn-secondary">
+        <span class="btn-icon">📷</span> Visible Only
+      </button>
+    </div>
+
+    <div id="progress-wrap" class="progress-wrap hidden">
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+
+    <div id="status" class="status"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
