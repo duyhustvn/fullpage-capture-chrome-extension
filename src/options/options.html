@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Full Page Capture — Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <img src="../assets/icons/icon32.png" alt="" class="logo">
+      <div>
+        <h1 class="page-title">Full Page Capture</h1>
+        <p class="page-sub">Settings</p>
+      </div>
+    </header>
+
+    <main class="settings-form">
+
+      <section class="section">
+        <h2 class="section-title">Output</h2>
+
+        <div class="field">
+          <label class="field-label">Default format</label>
+          <div class="radio-group" id="format-group">
+            <label class="radio-label">
+              <input type="radio" name="format" value="png"> PNG
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="format" value="pdf"> PDF
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="pdf-page-size">PDF page size</label>
+          <select id="pdf-page-size" class="select">
+            <option value="fit">Fit to image (single page)</option>
+            <option value="a4">A4</option>
+            <option value="letter">Letter</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="field-label">After capture</label>
+          <div class="radio-group" id="preview-group">
+            <label class="radio-label">
+              <input type="radio" name="showPreview" value="false"> Auto-download
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="showPreview" value="true"> Show preview tab
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Capture</h2>
+
+        <div class="field">
+          <label class="field-label" for="capture-delay">
+            Capture delay
+            <span class="hint">Wait before capturing (for pages that need time to render)</span>
+          </label>
+          <div class="slider-row">
+            <input type="range" id="capture-delay" min="0" max="5" step="1" class="slider">
+            <span id="delay-val" class="slider-val">0s</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Capture method</label>
+          <div class="radio-group" id="method-group">
+            <label class="radio-label">
+              <input type="radio" name="captureMethod" value="auto">
+              Auto <span class="badge">Recommended</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="captureMethod" value="cdp">
+              CDP only <span class="badge-muted">Best quality, needs debugger permission</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="captureMethod" value="scroll">
+              Scroll &amp; Stitch only <span class="badge-muted">No yellow bar</span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button id="btn-save" class="btn-save">Save settings</button>
+        <span id="save-status" class="save-status"></span>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="options.js" type="module"></script>
+</body>
+</html>

@@ -10,7 +10,25 @@
     <header class="header">
       <img src="../assets/icons/icon32.png" alt="" class="logo">
       <span class="title">Full Page Capture</span>
+      <button id="btn-settings" class="icon-btn" title="Settings">⚙</button>
     </header>
+
+    <div class="format-row">
+      <span class="format-label">Format:</span>
+      <div class="format-toggle">
+        <button id="fmt-png" class="fmt-btn active" data-fmt="png">PNG</button>
+        <button id="fmt-pdf" class="fmt-btn" data-fmt="pdf">PDF</button>
+      </div>
+    </div>
+
+    <div id="pdf-opts" class="pdf-opts hidden">
+      <label class="opt-label" for="pdf-size">Page size:</label>
+      <select id="pdf-size" class="opt-select">
+        <option value="fit">Fit to image</option>
+        <option value="a4">A4</option>
+        <option value="letter">Letter</option>
+      </select>
+    </div>
 
     <div class="buttons">
       <button id="btn-full-page" class="btn btn-primary">

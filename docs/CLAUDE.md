@@ -61,12 +61,12 @@ fullpage-capture/
 - [x] Basic popup UI với 2 button: "Full Page" và "Visible Only"
 - [x] Progress indicator trong popup
 
-### Phase 2 — PDF Export + Settings
-- [ ] PDF export từ captured image (jsPDF)
-- [ ] Page size options: A4, Letter, Fit-to-image
-- [ ] Settings page: default format (PNG/PDF), quality, delay before capture
-- [ ] Preview trong new tab trước khi save
-- [ ] Keyboard shortcut (Ctrl+Shift+S hoặc configurable)
+### Phase 2 — PDF Export + Settings ✅
+- [x] PDF export từ captured image (jsPDF)
+- [x] Page size options: A4, Letter, Fit-to-image
+- [x] Settings page: default format (PNG/PDF), quality, delay before capture
+- [x] Preview trong new tab trước khi save
+- [x] Keyboard shortcut (Ctrl+Shift+S hoặc configurable)
 
 ### Phase 3 — Advanced Features
 - [ ] Capture selection (chọn vùng trên trang)

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Full Page Capture — Preview</title>
+  <link rel="stylesheet" href="preview.css">
+</head>
+<body>
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <span class="app-name">Full Page Capture</span>
+      <span id="info-dims" class="info-chip"></span>
+      <span id="info-size" class="info-chip"></span>
+    </div>
+    <div class="toolbar-center">
+      <button id="btn-zoom-out" class="tool-btn" title="Zoom out">−</button>
+      <span id="zoom-label" class="zoom-label">100%</span>
+      <button id="btn-zoom-in" class="tool-btn" title="Zoom in">+</button>
+      <button id="btn-zoom-fit" class="tool-btn tool-btn-text">Fit</button>
+    </div>
+    <div class="toolbar-right">
+      <button id="btn-copy" class="action-btn">Copy</button>
+      <button id="btn-discard" class="action-btn action-btn-ghost">Discard</button>
+    </div>
+  </div>
+
+  <div id="preview-area" class="preview-area">
+    <div id="loading" class="loading">Loading capture...</div>
+    <img id="preview-img" class="preview-img hidden" alt="Captured page">
+  </div>
+
+  <div class="save-bar">
+    <div class="save-bar-left">
+      <label class="save-label" for="pdf-size">PDF page size:</label>
+      <select id="pdf-size" class="pdf-select">
+        <option value="fit">Fit to image</option>
+        <option value="a4">A4</option>
+        <option value="letter">Letter</option>
+      </select>
+    </div>
+    <div class="save-bar-right">
+      <button id="btn-save-png" class="save-btn save-btn-secondary">Save PNG</button>
+      <button id="btn-save-pdf" class="save-btn save-btn-primary">Save PDF</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="../lib/jspdf.umd.min.js"></script>
+  <script src="preview.js" type="module"></script>
+</body>
+</html>

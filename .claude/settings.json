@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wget -q -O /home/vbox/Projects/fullpage-capture/src/lib/jspdf.umd.min.js \"https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js\")"
+    ]
+  }
+}

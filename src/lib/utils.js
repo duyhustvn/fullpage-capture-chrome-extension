@@ -1,3 +1,7 @@
+export function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export function generateFilename(hostname, ext = 'png') {
   const ts = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
   const host = hostname.replace(/[^a-zA-Z0-9.-]/g, '_').replace(/^_+|_+$/g, '');

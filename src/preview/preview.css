@@ -1,0 +1,176 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue: #1e72e8;
+  --blue-dark: #1558c4;
+  --surface: #f5f7fb;
+  --border: #dde3ef;
+  --text: #1a1a2e;
+  --muted: #64748b;
+  --toolbar-h: 48px;
+  --savebar-h: 52px;
+}
+
+html, body { height: 100%; overflow: hidden; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Toolbar ── */
+.toolbar {
+  height: var(--toolbar-h);
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.toolbar-left  { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+.toolbar-center{ display: flex; align-items: center; gap: 4px; }
+.toolbar-right { display: flex; align-items: center; gap: 6px; }
+
+.app-name { font-weight: 600; font-size: 13px; white-space: nowrap; }
+
+.info-chip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 7px;
+  font-size: 11px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.info-chip:empty { display: none; }
+
+.tool-btn {
+  width: 28px; height: 28px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.1s;
+}
+.tool-btn-text { width: auto; padding: 0 8px; font-size: 12px; font-weight: 500; }
+.tool-btn:hover { background: var(--surface); }
+
+.zoom-label {
+  font-size: 12px;
+  color: var(--muted);
+  min-width: 38px;
+  text-align: center;
+}
+
+.action-btn {
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  transition: background 0.1s;
+}
+.action-btn:hover { background: var(--surface); }
+.action-btn-ghost { color: var(--muted); }
+
+/* ── Preview area ── */
+.preview-area {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px;
+  background: #e8ecf4;
+}
+
+.loading {
+  align-self: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+.loading.hidden { display: none; }
+
+.preview-img {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  border-radius: 2px;
+  cursor: zoom-in;
+  transition: width 0.15s ease;
+}
+.preview-img.hidden { display: none; }
+
+/* ── Save bar ── */
+.save-bar {
+  height: var(--savebar-h);
+  background: #fff;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.save-bar-left  { display: flex; align-items: center; gap: 8px; flex: 1; }
+.save-bar-right { display: flex; align-items: center; gap: 8px; }
+
+.save-label { font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+.pdf-select {
+  font-size: 12px;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.save-btn {
+  padding: 7px 16px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: background 0.1s, opacity 0.15s;
+}
+.save-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.save-btn-primary  { background: var(--blue); color: #fff; }
+.save-btn-primary:hover:not(:disabled) { background: var(--blue-dark); }
+.save-btn-secondary { background: #f0f4ff; color: var(--blue); border: 1px solid #c8d9f8; }
+.save-btn-secondary:hover:not(:disabled) { background: #e0eaff; }
+
+/* ── Toast ── */
+.toast {
+  position: fixed;
+  bottom: calc(var(--savebar-h) + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1a2e;
+  color: #fff;
+  font-size: 12px;
+  padding: 7px 16px;
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 100;
+  transition: opacity 0.3s;
+}
+.toast.hidden { display: none; }
+.toast.error  { background: #dc2626; }
