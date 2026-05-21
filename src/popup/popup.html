@@ -17,7 +17,7 @@
       <span class="format-label">Format:</span>
       <div class="format-toggle">
         <button id="fmt-png" class="fmt-btn active" data-fmt="png">PNG</button>
-        <button id="fmt-pdf" class="fmt-btn" data-fmt="pdf">PDF</button>
+        <button id="fmt-pdf" class="fmt-btn"        data-fmt="pdf">PDF</button>
       </div>
     </div>
 
@@ -37,15 +37,32 @@
       <button id="btn-visible" class="btn btn-secondary">
         <span class="btn-icon">📷</span> Visible Only
       </button>
+      <button id="btn-area" class="btn btn-secondary">
+        <span class="btn-icon">✂️</span> Select Area
+      </button>
+      <button id="btn-clipboard" class="btn btn-ghost">
+        <span class="btn-icon">📋</span> Copy to Clipboard
+      </button>
     </div>
 
     <div id="progress-wrap" class="progress-wrap hidden">
-      <div class="progress-bar">
-        <div class="progress-fill"></div>
-      </div>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
     </div>
 
     <div id="status" class="status"></div>
+
+    <!-- ── History panel ── -->
+    <div class="history-section">
+      <button id="btn-history" class="history-toggle">
+        <span>Recent captures</span>
+        <span id="history-count" class="history-count hidden"></span>
+        <span class="history-chevron">▾</span>
+      </button>
+      <div id="history-panel" class="history-panel hidden">
+        <div id="history-list" class="history-list"></div>
+        <button id="btn-clear-history" class="history-clear">Clear history</button>
+      </div>
+    </div>
   </div>
 
   <script src="popup.js"></script>

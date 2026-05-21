@@ -68,13 +68,15 @@ fullpage-capture/
 - [x] Preview trong new tab trước khi save
 - [x] Keyboard shortcut (Ctrl+Shift+S hoặc configurable)
 
-### Phase 3 — Advanced Features
-- [ ] Capture selection (chọn vùng trên trang)
-- [ ] Auto-detect và chờ lazy-loaded images
-- [ ] Infinite scroll detection + giới hạn capture
-- [ ] Annotation tools trên preview (text, arrow, highlight)
-- [ ] Copy to clipboard thay vì download
-- [ ] History: lưu recent captures (thumbnail + metadata)
+### Phase 3 — Advanced Features ✅
+- [x] Capture selection (chọn vùng trên trang)
+- [x] Auto-detect và chờ lazy-loaded images
+- [x] Infinite scroll detection + giới hạn capture
+- [x] Annotation tools trên preview (text, arrow, highlight)
+- [x] Copy to clipboard thay vì download
+- [x] History: lưu recent captures (thumbnail + metadata)
+- [x] Multi-canvas chunking cho trang > 32767px (chunked-stitch + multi-page PDF)
+- [x] Shadow DOM scan + overflow:hidden fix cho body/html
 
 ## Capture Flow
 

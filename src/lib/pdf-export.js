@@ -52,6 +52,64 @@ export async function generatePdf(dataUrl, pageSize, imgWidth, imgHeight) {
   return doc.output('blob');
 }
 
+// Generate multi-page PDF from an array of chunk data URLs (oversized pages).
+// Each chunk is rendered as one or more PDF pages at the chosen page size.
+export async function generatePdfFromChunks(chunkDataUrls, pageSize) {
+  const { jsPDF } = window.jspdf;
+
+  const PAGE = pageSize === 'a4'
+    ? { w: 595.28, h: 841.89 }
+    : pageSize === 'letter'
+    ? { w: 612, h: 792 }
+    : null;
+
+  const doc = new jsPDF({
+    unit: 'pt',
+    format: PAGE ? pageSize : 'a4',
+    orientation: 'portrait',
+    compress: true,
+  });
+
+  const margin   = PAGE ? 20 : 0;
+  const pageW    = doc.internal.pageSize.getWidth();
+  const pageH    = doc.internal.pageSize.getHeight();
+  const contentW = pageW  - margin * 2;
+  const contentH = pageH  - margin * 2;
+
+  let firstPage = true;
+  for (const chunkUrl of chunkDataUrls) {
+    const img    = await loadImage(chunkUrl);
+    const scale  = contentW / img.naturalWidth;
+    const chunkH = img.naturalHeight * scale;
+
+    // If chunk fits in one page
+    if (chunkH <= contentH) {
+      if (!firstPage) doc.addPage();
+      doc.addImage(chunkUrl, 'PNG', margin, margin, contentW, chunkH, '', 'FAST');
+      firstPage = false;
+      continue;
+    }
+
+    // Chunk spans multiple pages — slice with canvas
+    const srcPxPerPage = contentH / scale;
+    const totalPages   = Math.ceil(img.naturalHeight / srcPxPerPage);
+    for (let i = 0; i < totalPages; i++) {
+      if (!firstPage) doc.addPage();
+      const srcY  = i * srcPxPerPage;
+      const srcH  = Math.min(srcPxPerPage, img.naturalHeight - srcY);
+      const destH = srcH * scale;
+      const cv = document.createElement('canvas');
+      cv.width = img.naturalWidth;
+      cv.height = Math.round(srcH);
+      cv.getContext('2d').drawImage(img, 0, srcY, img.naturalWidth, srcH, 0, 0, img.naturalWidth, srcH);
+      doc.addImage(cv.toDataURL('image/jpeg', 0.92), 'JPEG', margin, margin, contentW, destH, '', 'FAST');
+      firstPage = false;
+    }
+  }
+
+  return doc.output('blob');
+}
+
 function loadImage(src) {
   return new Promise((resolve, reject) => {
     const img = new Image();

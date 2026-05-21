@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Full Page Capture",
-  "version": "2.0.0",
-  "description": "Capture full-page screenshots and export as PNG or PDF",
+  "version": "3.0.0",
+  "description": "Full-page screenshots with PDF export, annotations, area selection, and history",
   "background": {
     "service_worker": "background/service-worker.js",
     "type": "module"
@@ -35,6 +35,10 @@
       "description": "Capture full page screenshot"
     }
   },
-  "permissions": ["activeTab", "scripting", "downloads", "debugger", "storage", "unlimitedStorage"],
+  "permissions": [
+    "activeTab", "scripting", "downloads",
+    "debugger", "storage", "unlimitedStorage",
+    "clipboardWrite"
+  ],
   "host_permissions": ["<all_urls>"]
 }

@@ -6,37 +6,75 @@
   <link rel="stylesheet" href="preview.css">
 </head>
 <body>
+  <!-- ── Top toolbar ── -->
   <div class="toolbar">
     <div class="toolbar-left">
       <span class="app-name">Full Page Capture</span>
       <span id="info-dims" class="info-chip"></span>
       <span id="info-size" class="info-chip"></span>
+      <span id="info-chunks" class="info-chip warn hidden"></span>
     </div>
     <div class="toolbar-center">
       <button id="btn-zoom-out" class="tool-btn" title="Zoom out">−</button>
       <span id="zoom-label" class="zoom-label">100%</span>
-      <button id="btn-zoom-in" class="tool-btn" title="Zoom in">+</button>
+      <button id="btn-zoom-in"  class="tool-btn" title="Zoom in">+</button>
       <button id="btn-zoom-fit" class="tool-btn tool-btn-text">Fit</button>
     </div>
     <div class="toolbar-right">
-      <button id="btn-copy" class="action-btn">Copy</button>
+      <button id="btn-copy"    class="action-btn">Copy</button>
       <button id="btn-discard" class="action-btn action-btn-ghost">Discard</button>
     </div>
   </div>
 
-  <div id="preview-area" class="preview-area">
-    <div id="loading" class="loading">Loading capture...</div>
-    <img id="preview-img" class="preview-img hidden" alt="Captured page">
+  <!-- ── Annotation toolbar ── -->
+  <div id="anno-toolbar" class="anno-toolbar hidden">
+    <div class="anno-tools">
+      <button class="anno-btn active" data-tool="freehand"  title="Freehand draw">✏️</button>
+      <button class="anno-btn"        data-tool="arrow"     title="Arrow">➜</button>
+      <button class="anno-btn"        data-tool="rect"      title="Rectangle">▭</button>
+      <button class="anno-btn"        data-tool="highlight" title="Highlight">🖊</button>
+      <button class="anno-btn"        data-tool="text"      title="Text">T</button>
+    </div>
+    <div class="anno-sep"></div>
+    <div class="anno-tools">
+      <input  type="color" id="anno-color" class="anno-color" value="#e8212a" title="Color">
+      <select id="anno-size" class="anno-size" title="Stroke width">
+        <option value="2">Thin</option>
+        <option value="4" selected>Medium</option>
+        <option value="8">Thick</option>
+      </select>
+    </div>
+    <div class="anno-sep"></div>
+    <div class="anno-tools">
+      <button id="anno-undo"  class="anno-btn-sm" title="Undo (Ctrl+Z)">↩</button>
+      <button id="anno-redo"  class="anno-btn-sm" title="Redo (Ctrl+Y)">↪</button>
+      <button id="anno-clear" class="anno-btn-sm" title="Clear annotations">✕</button>
+    </div>
   </div>
 
+  <!-- ── Preview area ── -->
+  <div id="preview-area" class="preview-area">
+    <div id="loading" class="loading">Loading capture…</div>
+    <div id="img-wrapper" class="img-wrapper hidden">
+      <img    id="preview-img"  class="preview-img"  alt="Captured page">
+      <canvas id="anno-canvas"  class="anno-canvas"></canvas>
+    </div>
+  </div>
+
+  <!-- ── Save bar ── -->
   <div class="save-bar">
     <div class="save-bar-left">
-      <label class="save-label" for="pdf-size">PDF page size:</label>
-      <select id="pdf-size" class="pdf-select">
-        <option value="fit">Fit to image</option>
-        <option value="a4">A4</option>
-        <option value="letter">Letter</option>
-      </select>
+      <label class="save-label">
+        <input type="checkbox" id="annotate-toggle"> Annotate
+      </label>
+      <div class="pdf-group">
+        <label class="save-label" for="pdf-size">PDF size:</label>
+        <select id="pdf-size" class="pdf-select">
+          <option value="fit">Fit to image</option>
+          <option value="a4">A4</option>
+          <option value="letter">Letter</option>
+        </select>
+      </div>
     </div>
     <div class="save-bar-right">
       <button id="btn-save-png" class="save-btn save-btn-secondary">Save PNG</button>

@@ -3,37 +3,43 @@ import { getSettings, saveSettings } from '../lib/settings.js';
 document.addEventListener('DOMContentLoaded', async () => {
   const settings = await getSettings();
 
-  // Populate form
-  setRadio('format', settings.format);
-  document.getElementById('pdf-page-size').value = settings.pdfPageSize;
-  setRadio('showPreview', String(settings.showPreview));
+  // ── Phase 1 / 2 settings ──
+  setRadio('format',        settings.format);
+  setRadio('showPreview',   String(settings.showPreview));
   setRadio('captureMethod', settings.captureMethod);
+  document.getElementById('pdf-page-size').value = settings.pdfPageSize;
 
-  const delaySlider = document.getElementById('capture-delay');
-  const delayVal    = document.getElementById('delay-val');
-  delaySlider.value = settings.captureDelay;
-  delayVal.textContent = `${settings.captureDelay}s`;
+  bindSlider('capture-delay', 'delay-val', settings.captureDelay, v => `${v}s`);
 
-  delaySlider.addEventListener('input', () => {
-    delayVal.textContent = `${delaySlider.value}s`;
-  });
+  // ── Phase 3 settings ──
+  setRadio('lazyLoadEnabled', String(settings.lazyLoadEnabled));
+  setRadio('saveHistory',     String(settings.saveHistory));
 
-  // Save
+  bindSlider('lazy-timeout',  'lazy-timeout-val',  settings.lazyLoadTimeout,      v => `${v}s`);
+  bindSlider('scroll-limit',  'scroll-limit-val',  settings.infiniteScrollLimit,
+    v => v === '0' ? 'No limit' : `${Number(v).toLocaleString()}px`);
+
+  // ── Save ──
   document.getElementById('btn-save').addEventListener('click', async () => {
     await saveSettings({
-      format:        getRadio('format'),
-      pdfPageSize:   document.getElementById('pdf-page-size').value,
-      showPreview:   getRadio('showPreview') === 'true',
-      captureMethod: getRadio('captureMethod'),
-      captureDelay:  Number(delaySlider.value),
+      format:               getRadio('format'),
+      pdfPageSize:          document.getElementById('pdf-page-size').value,
+      showPreview:          getRadio('showPreview') === 'true',
+      captureMethod:        getRadio('captureMethod'),
+      captureDelay:         sliderVal('capture-delay'),
+      lazyLoadEnabled:      getRadio('lazyLoadEnabled') === 'true',
+      lazyLoadTimeout:      sliderVal('lazy-timeout'),
+      infiniteScrollLimit:  sliderVal('scroll-limit'),
+      saveHistory:          getRadio('saveHistory') === 'true',
     });
 
-    const status = document.getElementById('save-status');
-    status.textContent = 'Saved!';
-    setTimeout(() => { status.textContent = ''; }, 2000);
+    const st = document.getElementById('save-status');
+    st.textContent = 'Saved!';
+    setTimeout(() => { st.textContent = ''; }, 2000);
   });
 });
 
+// ── Helpers ───────────────────────────────────────────────────────────────────
 function setRadio(name, value) {
   const el = document.querySelector(`input[name="${name}"][value="${value}"]`);
   if (el) el.checked = true;
@@ -42,4 +48,17 @@ function setRadio(name, value) {
 function getRadio(name) {
   const el = document.querySelector(`input[name="${name}"]:checked`);
   return el ? el.value : null;
+}
+
+function bindSlider(sliderId, valId, initial, fmt) {
+  const slider = document.getElementById(sliderId);
+  const label  = document.getElementById(valId);
+  if (!slider || !label) return;
+  slider.value    = initial;
+  label.textContent = fmt(String(initial));
+  slider.addEventListener('input', () => { label.textContent = fmt(slider.value); });
+}
+
+function sliderVal(id) {
+  return Number(document.getElementById(id).value);
 }
